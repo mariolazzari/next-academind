@@ -3,26 +3,37 @@ import MeetupList from "../components/meetups/MeetupList";
 //import DUMMY from "../data/dummy-data";
 
 const AllMeetups = () => {
-  consy[(loading, setLoading)] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [meetups, setMeetups] = useState([]);
 
   useEffect(() => {
-    fetech(
-      "https://react-router-7b31a-default-rtdb.europe-west1.firebasedatabase.app/meetups.json"
-    )
-      .then(res => {
-        return res.json();
-      })
-      .then(data => {
-        setLoading(false);
-        setMeetups(data);
-      });
+    const fetchData = async () => {
+      setLoading(true);
+      const res = await fetch(
+        "https://react-router-7b31a-default-rtdb.europe-west1.firebasedatabase.app/meetups.json"
+      );
+      const data = await res.json();
+      // parse firebase res
+      const meetups = [];
+      for (const key in data) {
+        const meetup = {
+          id: key,
+          ...data[key],
+        };
+        meetups.push(meetup);
+      }
+
+      setLoading(false);
+      setMeetups(meetups);
+    };
+
+    fetchData();
   }, []);
 
   return (
     <section>
       <h1>All meetups</h1>
-      <MeetupList meetups={meetups} />
+      <MeetupList meetups={meetups || []} />
     </section>
   );
 };
