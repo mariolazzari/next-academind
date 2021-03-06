@@ -1,6 +1,9 @@
+import { useHistory } from "react-router-dom";
 import NewMeetupForm from "../components/meetups/NewMeetupForm";
 
 const NewMeetup = () => {
+  const history = useHistory();
+
   const addMeetupHandler = meetup => {
     fetch(
       "https://react-router-7b31a-default-rtdb.europe-west1.firebasedatabase.app/meetups.json",
@@ -11,7 +14,9 @@ const NewMeetup = () => {
           "Content-Type": "application/json",
         },
       }
-    );
+    ).then(() => {
+      history.replace("/");
+    });
   };
 
   return (
