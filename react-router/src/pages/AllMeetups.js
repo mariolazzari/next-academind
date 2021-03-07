@@ -33,6 +33,7 @@ const AllMeetups = () => {
   return (
     <section>
       <h1>All meetups</h1>
+      {loading && <p>Loading meetups...</p>}
       <MeetupList meetups={meetups || []} />
     </section>
   );

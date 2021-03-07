@@ -4,8 +4,8 @@ import NewMeetupForm from "../components/meetups/NewMeetupForm";
 const NewMeetup = () => {
   const history = useHistory();
 
-  const addMeetupHandler = meetup => {
-    fetch(
+  const addMeetupHandler = async meetup => {
+    await fetch(
       "https://react-router-7b31a-default-rtdb.europe-west1.firebasedatabase.app/meetups.json",
       {
         method: "POST",
@@ -14,9 +14,8 @@ const NewMeetup = () => {
           "Content-Type": "application/json",
         },
       }
-    ).then(() => {
-      history.replace("/");
-    });
+    );
+    history.replace("/");
   };
 
   return (
