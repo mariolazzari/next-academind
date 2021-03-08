@@ -1,13 +1,15 @@
-import Link from "next/link";
+import Button from "../ui/Button";
 import classes from "./EventItem.module.css";
+import DateIcon from "../icons/date-icon";
+import AddressIcon from "../icons/address-icon";
+import ArrowRightIcon from "../icons/arrow-right-icon";
 
 const EventItem = ({ id, title, image, date, location }) => {
-  const humanReadableDate = () =>
-    new Date(date).toLocaleDateString("en-US", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
+  const humanReadableDate = new Date(date).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   const formattedAddress = location.replace(", ", "\n");
 
@@ -18,14 +20,21 @@ const EventItem = ({ id, title, image, date, location }) => {
         <div className={classes.summary}>
           <h2>{title}</h2>
           <div className={classes.date}>
+            <DateIcon />
             <time>{humanReadableDate}</time>
           </div>
           <div className={classes.address}>
+            <AddressIcon />
             <address>{formattedAddress}</address>
           </div>
         </div>
         <div className={classes.actions}>
-          <Link href={`/events/${id}`}>Explore event</Link>
+          <Button link={`/events/${id}`}>
+            <span>Explore event</span>
+            <span className={classes.icon}>
+              <ArrowRightIcon />
+            </span>
+          </Button>
         </div>
       </div>
     </li>
