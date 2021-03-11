@@ -1,13 +1,16 @@
-import Link from "next/Link";
-import path from "path";
-import fs from "fs/promises";
+import path from 'path';
+import fs from 'fs/promises';
 
-function HomePage({ products }) {
+import Link from 'next/link';
+
+function HomePage(props) {
+  const { products } = props;
+
   return (
     <ul>
-      {products.map(p => (
-        <li key={p.id}>
-          <Link href={`/products/${p.id}`}>{p.title}</Link>
+      {products.map((product) => (
+        <li key={product.id}>
+          <Link href={`/products/${product.id}`}>{product.title}</Link>
         </li>
       ))}
     </ul>
@@ -15,32 +18,28 @@ function HomePage({ products }) {
 }
 
 export async function getStaticProps(context) {
-  const filePath = path.join(process.cwd(), "dummy.json");
+  console.log('(Re-)Generating...');
+  const filePath = path.join(process.cwd(), 'data', 'dummy-backend.json');
   const jsonData = await fs.readFile(filePath);
   const data = JSON.parse(jsonData);
 
-  // redirect if no data
   if (!data) {
     return {
       redirect: {
-        destination: "/no-data",
+        destination: '/no-data',
       },
     };
   }
 
-  // return 404 page
   if (data.products.length === 0) {
-    return {
-      notFound: true,
-    };
+    return { notFound: true };
   }
 
   return {
     props: {
       products: data.products,
     },
-    // page regeneration every minute
-    revalidate: 60,
+    revalidate: 10,
   };
 }
 

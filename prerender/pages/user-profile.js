@@ -1,19 +1,15 @@
-const UserProfile = props => {
-  return (
-    <div>
-      <h1>{props.username}</h1>
-    </div>
-  );
-};
+function UserProfilePage(props) {
+  return <h1>{props.username}</h1>
+}
 
-export default UserProfile;
+export default UserProfilePage;
 
 export async function getServerSideProps(context) {
   const { params, req, res } = context;
-
+  
   return {
     props: {
-      username: "Mario",
-    },
+      username: 'Max'
+    }
   };
 }

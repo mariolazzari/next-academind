@@ -1,22 +1,17 @@
-const UserId = props => {
-  return (
-    <div>
-      <h1>{props.id}</h1>
-    </div>
-  );
-};
+function UserIdPage(props) {
+  return <h1>{props.id}</h1>;
+}
 
-export default UserId;
+export default UserIdPage;
 
 export async function getServerSideProps(context) {
   const { params } = context;
-  const userId = params.uid;
 
-  //console.log("Server side");
+  const userId = params.uid;
 
   return {
     props: {
-      id: "userId-" + userId,
+      id: 'userid-' + userId,
     },
   };
 }
