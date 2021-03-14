@@ -4,12 +4,20 @@ function HomePage() {
   const mailRef = useRef();
   const fbRef = useRef();
 
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
-    const data = {
+    const body = {
       email: mailRef.current.value,
       feedback: fbRef.current.value,
     };
+
+    const res = await fetch("/api/feedback", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await res.json();
+    console.log(data);
   };
 
   return (
