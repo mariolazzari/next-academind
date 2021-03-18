@@ -18,11 +18,11 @@ const HomePage = props => (
 );
 
 export function getStaticProps() {
-  const featuredPosts = getFeaturedPosts();
+  const posts = getFeaturedPosts();
 
   return {
     props: {
-      posts: featuredPosts,
+      posts,
     },
   };
 }
