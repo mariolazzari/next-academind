@@ -6,7 +6,7 @@ import { getFeaturedPosts } from "../lib/posts-util";
 const HomePage = props => (
   <>
     <Head>
-      <title>Max' Blog</title>
+      <title>Max Blog</title>
       <meta
         name="description"
         content="I post about programming and web development."
