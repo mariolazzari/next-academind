@@ -1,5 +1,4 @@
 import { useRef } from "react";
-
 import classes from "./profile-form.module.css";
 
 function ProfileForm(props) {
@@ -8,7 +7,6 @@ function ProfileForm(props) {
 
   function submitHandler(event) {
     event.preventDefault();
-
     const enteredOldPassword = oldPasswordRef.current.value;
     const enteredNewPassword = newPasswordRef.current.value;
 
